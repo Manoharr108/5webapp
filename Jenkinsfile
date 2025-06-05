@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven'
+        ansible 'ansible'  // <- Only if you configured it under Global Tools
     }
     stages {
         stage('Checkout') {
@@ -21,10 +22,13 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                  sh 'mvn clean package'
-               ansiblePlaybook playbook: 'ansible/deploy.yml', inventory: 'ansible/hosts.ini'
-          
+                ansiblePlaybook(
+                    playbook: 'ansible/deploy.yml',
+                    inventory: 'ansible/hosts.ini',
+                    colorized: true
+                )
             }
         }
     }
 }
+
