@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven'
-        ansible 'ansible'  // <- Only if you configured it under Global Tools
+        // <- Only if you configured it under Global Tools
     }
     stages {
         stage('Checkout') {
